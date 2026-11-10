@@ -1,0 +1,13 @@
+in terninal
+  -python -m venv env_name
+  -env_name\Scripts\activat (for windows)
+
+  -pip install django #pip install is python's package installer
+  -django-admin startproject project_name
+  # (root project folder-sms ,it contains the important files and folders of your django project)
+  -cd project_name
+  -python manage.py runserver
+  -python manage.py startapp app (here sms)
+  -cd sms
+  -urls and views
+  
