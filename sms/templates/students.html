@@ -4,4 +4,28 @@
 
 {% block content %}
     <h1>Student page</h1>
+    {% comment %} {{students}} {% endcomment %}
+    <table>
+        <tr>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Result</th>
+            <th>Course</th>
+        <tr>
+        {% for student in students %}
+        <tr>
+            <td>{{student.name}}</td>
+            <td>{{student.age}}</td>
+            <td>
+                {% if student.mark >= 40%}
+                    passed
+                {% else%}
+                    Failed
+                {% endif %}
+            </td>
+            <td>{{student.course}}</td>
+            <td><a href="./{{student.name}}">View details</a></td> 
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
