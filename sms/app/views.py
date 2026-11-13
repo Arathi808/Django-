@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
 from django.http import HttpResponse
 # def home(request):
 #     return HttpResponse('home page')
@@ -39,3 +39,13 @@ def get_student(request,name):
         if student['name'] == name:
             std = student
     return render(request,'student.html',{'name':name,'student':std})
+
+def add_student(request):
+    if request.method == 'POST':
+        name=request.POST['name']
+        age=int(request.POST['age'])
+        mark=int(request.POST['mark'])
+        course=request.POST['course']
+        all_students.append({'name':name,'age':age,'mark':mark,'course':course})
+        return redirect('view_students')
+    return render(request,'add_student.html')

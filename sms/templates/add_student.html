@@ -1,0 +1,40 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>document</title>
+    <link rel="stylesheet" href="{% static 'css/index.css' %}">
+</head>
+<body>
+    <form action="" method="post">
+        {% csrf_token %}
+        <p>
+            <label for="">Name: </label>
+            <input type="text" placeholder="Enter name" name="name">
+        </p>
+        <p>
+            <label for="">Age: </label>
+            <input type="number" placeholder="Enter age" name="age">
+        </p>
+        <p>
+            <label for="">Mark: </label>
+            <input type="number" placeholder="Enter mark" name="mark">
+        </p>
+        <p>
+            <label for="">Course: </label>
+            <select name="course" id="">
+                <option value="" selected disabled>---Select a course---</option>
+                <option value="BBA">BBA</option>
+                <option value="BCA">BCA</option>
+                <option value="MBA">MBA</option>
+                <option value="MCA">MCA</option>
+            </select>
+        </p>
+        <p>
+            <input type="submit" value="Add student">
+        </p>
+    </form>
+</body>
+</html>
