@@ -1,17 +1,24 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Students{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/students.css' %}">
+{% endblock %}
+
 {% block content %}
     <h1>Student page</h1>
+    <a href="add/" class="add-btn">Add New Student</a>
     {% comment %} {{students}} {% endcomment %}
-    <table>
+    <table class="student-table">
         <tr>
             <th>Name</th>
             <th>Age</th>
             <th>Result</th>
             <th>Course</th>
-        <tr>
+            <th>Actions</th>
+        </tr>
         {% for student in students %}
         <tr>
             <td>{{student.name}}</td>
@@ -24,7 +31,11 @@
                 {% endif %}
             </td>
             <td>{{student.course}}</td>
-            <td><a href="./{{student.id}}">View details</a></td> 
+            <td>
+                <a href="./{{student.id}}" class="view">View details</a>
+                <a href="./{{ student.id }}/edit/" class="edit">Edit student</a> 
+                <a href="./{{student.id}}/delete" class="delete">Delete student</a>
+            </td> 
         </tr>
         {% endfor %}
     </table>

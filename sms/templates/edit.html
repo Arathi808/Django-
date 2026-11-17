@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Edit Student page{% endblock %}
+
+{% block content%}
+<h1>Edit page</h1>
+<form action="" method="post">
+    {% csrf_token %}
+    <p>
+        <label for="">Name: </label>
+        <input type="text" placeholder="Enter name" name="name" value="{{student.name}}">
+    </p>
+    <p>
+        <label for="">Age: </label>
+        <input type="number" placeholder="Enter age" name="age" value="{{student.age}}">
+    </p>
+    <p>
+        <label for="">Mark: </label>
+        <input type="number" placeholder="Enter mark" name="mark" value="{{student.mark}}">
+    </p>
+    <p>
+        <label for="">Course: </label>
+        <select name="course" id="" >
+            <option value="BBA" {% if student.course == 'BBA'%} selected {% endif %}>BBA</option>
+            <option value="BCA" {% if student.course == 'BCA'%} selected {% endif %}>BCA</option>
+            <option value="MBA" {% if student.course == 'MBA'%} selected {% endif %}>MBA</option>
+            <option value="MCA" {% if student.course == 'MCA'%} selected {% endif %}>MCA</option>
+        </select>
+    </p>
+    <p>
+        <input type="submit" value="Edit student">
+    </p>
+</form>
+{% endblock %}

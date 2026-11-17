@@ -42,3 +42,19 @@ def add_student(request):
         
         return redirect('view_students')
     return render(request,'add_student.html')
+
+def edit_student(request, id):
+    student = Student.objects.get(id=id)
+    if request.method == 'POST':
+        student.name = request.POST['name']
+        student.age = int(request.POST['age'])
+        student.mark = int(request.POST['mark'])
+        student.course = request.POST['course']
+        student.save()
+        return redirect('view_students')
+    return render(request,'edit.html',{'student':student})
+
+def delete_student(request,id):
+    student = Student.objects.get(id=id)
+    student.delete()
+    return redirect('view_students')

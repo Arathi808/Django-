@@ -1,14 +1,13 @@
-{% load static%}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>document</title>
-    <link rel="stylesheet" href="{% static 'css/index.css' %}">
-</head>
-<body>
-    <form action="" method="post">
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Add Student page{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'css/add_student.css' %}">
+{% endblock %}
+
+{% block content%}
+    <form action="" method="post" class="student-form">
         {% csrf_token %}
         <p>
             <label for="">Name: </label>
@@ -36,5 +35,4 @@
             <input type="submit" value="Add student">
         </p>
     </form>
-</body>
-</html>
+{% endblock %}
