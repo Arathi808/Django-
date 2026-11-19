@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
-from .models import Student
+from .models import Student, Course
 # def home(request):
 #     return HttpResponse('home page')
 # def about(request): #http://127.0.0.1:8000/
@@ -22,8 +22,13 @@ def services(request):
     return render(request, 'services.html')
 
 def students(request):
-    all_students = Student.objects.all()
-    return render(request, 'students.html', {'students':all_students})
+    course = request.GET.get('course')
+    if course:
+        all_students = Student.objects.filter(course=course)
+    else:
+        all_students = Student.objects.all()
+    courses = Course.objects.all()
+    return render(request, 'students.html', {'students':all_students, 'courses':courses})
 
 def contacts(request):
     return render(request, 'contacts.html')

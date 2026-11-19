@@ -10,7 +10,19 @@
 {% block content %}
     <h1>Student page</h1>
     <a href="add/" class="add-btn">Add New Student</a>
-    {% comment %} {{students}} {% endcomment %}
+    <form>
+        <select name="course" id="">
+            <option value="" selected disabled>-----Filter by Courses----</option>
+            <option value="">All</option>
+            {% for course in courses%}
+                <option value = "{{course.name}}">{{course.name}}</option>
+            {% endfor %}
+        </select>
+        <input type="submit"  value="Filter"></input>
+        <input type="text"  value="" placeholder="Search by name"></input>
+        <input type="submit"  value="Search"></input>
+    </form>
+   
     <table class="student-table">
         <tr>
             <th>Name</th>
