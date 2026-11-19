@@ -21,10 +21,9 @@
     <p>
         <label for="">Course: </label>
         <select name="course" id="" >
-            <option value="BBA" {% if student.course == 'BBA'%} selected {% endif %}>BBA</option>
-            <option value="BCA" {% if student.course == 'BCA'%} selected {% endif %}>BCA</option>
-            <option value="MBA" {% if student.course == 'MBA'%} selected {% endif %}>MBA</option>
-            <option value="MCA" {% if student.course == 'MCA'%} selected {% endif %}>MCA</option>
+            {% for course in courses %}
+                <option {% if student.course == course%}selected{% endif %} value="{{course.id}}">{{course.name}}</option>
+            {% endfor %}
         </select>
     </p>
     <p>

@@ -1,4 +1,4 @@
-from django.shortcuts import render,redirect
+from django.shortcuts import render,redirect,get_object_or_404
 from django.http import HttpResponse
 from .models import Student, Course
 # def home(request):
@@ -23,12 +23,28 @@ def services(request):
 
 def students(request):
     course = request.GET.get('course')
+    search = request.GET.get('search')
     if course:
-        all_students = Student.objects.filter(course=course)
+        all_students = Student.objects.filter(course=course)  
     else:
         all_students = Student.objects.all()
+    if search:
+        all_students = Student.objects.filter(name__icontains=search)  
     courses = Course.objects.all()
     return render(request, 'students.html', {'students':all_students, 'courses':courses})
+
+# def students(request):
+#     course=request.GET.get('course')
+#     if course:
+#        all_students=Student.objects.filter(course=course)
+#     else:   
+#         all_students=Student.objects.all()
+#     search = request.GET.get('search')
+
+#     if search:
+#         all_students = all_students.filter(name__icontains=search)
+#     courses=Course.objects.all()
+#     return render(request,'students.html',{'students':all_students,'courses':courses})
 
 def contacts(request):
     return render(request, 'contacts.html')
@@ -42,11 +58,13 @@ def add_student(request):
         name=request.POST['name']
         age=int(request.POST['age'])
         mark=int(request.POST['mark'])
-        course=request.POST['course']
+        course_id = request.POST['course']
+        course=get_object_or_404(Course,id=course_id)
+        print(course)
         Student.objects.create(name=name, age=age, mark=mark, course=course)
-        
         return redirect('view_students')
-    return render(request,'add_student.html')
+    courses = Course.objects.all()
+    return render(request,'add_student.html',{'courses':courses})
 
 def edit_student(request, id):
     student = Student.objects.get(id=id)
@@ -54,10 +72,11 @@ def edit_student(request, id):
         student.name = request.POST['name']
         student.age = int(request.POST['age'])
         student.mark = int(request.POST['mark'])
-        student.course = request.POST['course']
+        student.course = get_object_or_404(Course,id=request.POST['course'])
         student.save()
         return redirect('view_students')
-    return render(request,'edit.html',{'student':student})
+    courses=Course.objects.all()
+    return render(request,'edit.html',{'student':student,'courses':courses})
 
 def delete_student(request,id):
     student = Student.objects.get(id=id)
