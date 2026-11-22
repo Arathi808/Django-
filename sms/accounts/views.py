@@ -1,6 +1,6 @@
 from django.shortcuts import render,redirect
 from django.contrib.auth.models import User
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate,login,logout
 # Create your views here.
 def register_view(request):
     if request.method == "POST":
@@ -30,5 +30,6 @@ def login_view(request):
         return redirect('view_students')
     return render(request,'accounts/login.html')
 
-def logout(request):
-    pass
+def logout_view(request):
+    logout(request)
+    return render(request,'accounts/logout.html')
