@@ -17,7 +17,11 @@
                 <li class="nav-item"><a href="{% url 'services' %}" class="nav-link">Services</a></li>
                 <li class="nav-item"><a href="{% url 'view_students' %}" class="nav-link">Students</a></li>
                 <li class="nav-item"><a href="{% url 'contacts' %}" class="nav-link">Contacts</a></li>
-                <li class="nav-item"><a href="{% url 'logout' %}" class="nav-link">Logout</a></li>
+                {% if is_logged_in %}
+                    <a href="/accounts/logout">Logout</a>
+                {% else %}
+                    <a href="/accounts/login">Login</a>
+                {% endif%}
             </ul>
         </div>
     </nav>
