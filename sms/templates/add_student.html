@@ -7,7 +7,7 @@
 {% endblock %}
 
 {% block content%}
-    <form action="" method="post" class="student-form">
+    <form action="" method="post" class="student-form" enctype="multipart/form-data">
         {% csrf_token %}
         <p>
             <label for="">Name: </label>
@@ -29,6 +29,10 @@
                     <option value="{{course.id}}">{{course.name}}</option>
                 {% endfor %}
             </select>
+        </p>
+        <p>
+            <label for="">Image: </label>
+            <input type="file" name="profile" id="">
         </p>
         <p>
             <input type="submit" value="Add student">

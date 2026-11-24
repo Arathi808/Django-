@@ -74,13 +74,14 @@ def get_student(request,id):
 @login_required
 def add_student(request):
     if request.method == 'POST':
+        image=request.FILES.get('profile')
         name=request.POST['name']
         age=int(request.POST['age'])
         mark=int(request.POST['mark'])
         course_id = request.POST['course']
         course=get_object_or_404(Course,id=course_id)
         print(course)
-        Student.objects.create(name=name, age=age, mark=mark, course=course)
+        Student.objects.create(name=name, age=age, mark=mark, course=course,image=image)
         return redirect('view_students')
     courses = Course.objects.all()
     return render(request,'add_student.html',{'courses':courses})
@@ -101,5 +102,7 @@ def edit_student(request, id):
 @login_required
 def delete_student(request,id):
     student = Student.objects.get(id=id)
+    # print(student)
     student.delete()
+
     return redirect('view_students')

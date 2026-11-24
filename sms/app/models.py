@@ -11,6 +11,7 @@ class Student(models.Model):
     age=models.IntegerField()
     course=models.ForeignKey(Course,on_delete=models.CASCADE,related_name='student')
     mark=models.IntegerField()
+    image = models.ImageField(upload_to='uploads')
     def __str__(self):
         return f'Student : {self.name}'
 
